@@ -8,7 +8,19 @@ struct Cli {
     /// The path to the file to read
     path: std::path::PathBuf,
 }
+#[derive(Parser, Debug)]
+struct Namer {
+    /// The name of the person to greet
+    name: String,
+    /// The number of times to greet
+    count: u8,
+}
 
 fn main() {
-    let args = Cli::parse();
+    let cli_args = Cli::parse();
+    let name_args: Namer = Namer::parse();
+
+    for _ in 0..name_args.count {
+        println!("Hello {}!", name_args.name)
+    }
 }
